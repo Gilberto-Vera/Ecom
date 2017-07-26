@@ -34,7 +34,8 @@ public class SessionContext {
          }
     }
     
-    public HashMap<Integer, Integer> getCarrinho(){
+    @SuppressWarnings("unchecked")
+	public HashMap<Integer, Integer> getCarrinho(){
         return (HashMap<Integer, Integer>) getAttribute("carrinho");
    }
    
