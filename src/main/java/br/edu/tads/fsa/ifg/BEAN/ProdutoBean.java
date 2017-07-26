@@ -21,7 +21,6 @@ public class ProdutoBean implements Serializable{
 	private Produto produto = new Produto();
 	private Carrinho carrinho = new Carrinho();
 	private List<Produto> produtos = null;
-	private List<Produto> produtosCarrinho = null;
 	private Produto produtoSelecionado;
 	
 	public void novoCadastroProduto(){
