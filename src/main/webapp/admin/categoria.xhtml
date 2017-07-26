@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+
+	<h:form>
+		<p:menubar style="margin-top: 0px; margin-bottom: 20px">
+
+			<p:submenu label="Cadastro">
+				<p:menuitem onclick="PF('dlg3').show();" value="Categoria" />
+			</p:submenu>
+
+			<p:submenu label="Consulta">
+				<p:menuitem value="Produtos"
+					action="/admin/produto?faces-redirect=true" />
+				<p:menuitem value="Categorias"
+					action="/admin/categoria?faces-redirect=true" />
+			</p:submenu>
+
+			<p:submenu label="Sistema">
+				<p:menuitem value="Sair" />
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+
+	<p:dialog header="Cadastro Categoria" widgetVar="dlg3" modal="true"
+		height="240">
+		<h:form>
+			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Nome:" for="nome" />
+				<p:inputText value="#{categoriaBean.categoria.nome}" id="nome" />
+				<p:commandButton update="tabela" value="Cadastrar"
+					action="#{categoriaBean.cadastraCategoria}" icon="ui-icon-disk">
+				</p:commandButton>
+				<p:commandButton update="tabela" process="@this" value="Fechar"
+					onclick="PF('dlg3').hide();" icon="ui-icon-disk"
+					action="#{categoriaBean.novoCadastroCategoria}">
+				</p:commandButton>
+			</h:panelGrid>
+
+		</h:form>
+		<f:ajax event="close" update="tabela" render="tabela"></f:ajax>
+	</p:dialog>
+
+
+
+	<h:form id="tabela">
+
+		<p:dataTable var="categoria" value="#{categoriaBean.categorias}"
+			paginatorPosition="bottom" paginator="true" rows="10"
+			id="tabelaCategorias">
+			<p:column headerText="Id">
+				<h:outputText value="#{categoria.id_categoria}" />
+			</p:column>
+
+			<p:column headerText="Categoria">
+				<h:outputText value="#{categoria.nome}" />
+			</p:column>
+
+			<p:column>
+				<p:commandButton icon="ui-icon-pencil" title="Editar"
+					process="@this" action="/admin/alteraCategoria?faces-redirect=true">
+					<f:setPropertyActionListener value="#{categoria}"
+						target="#{categoriaBean.categoriaSelecionada}" />
+				</p:commandButton>
+				<p:commandButton icon="ui-icon-trash" title="Excluir"
+					process="@this" update="@form"
+					action="#{categoriaBean.removeCategoria}">
+					<f:setPropertyActionListener value="#{categoria}"
+						target="#{categoriaBean.categoriaSelecionada}" />
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+
+</h:body>
+</html>

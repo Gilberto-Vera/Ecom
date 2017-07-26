@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<!-- <ui:composition template="/admin/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<ui:define name="corpo"> -->
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Insert title here</title>
+</h:head>
+<h:body>
+	<h:form>
+
+		<p:menubar style="margin-top: 0px; margin-bottom: 20px">
+			<p:submenu label="Cadastro">
+				<p:menuitem onclick="PF('dlg2').show();" value="Produto" />
+			</p:submenu>
+			<p:submenu label="Consulta">
+				<p:menuitem value="Produtos"
+					action="/admin/produto?faces-redirect=true" />
+				<p:menuitem value="Categorias"
+					action="/admin/categoria?faces-redirect=true" />
+			</p:submenu>
+			<p:submenu label="Sistema">
+				<p:menuitem value="Sair" />
+			</p:submenu>
+		</p:menubar>
+	</h:form>
+
+	<p:dialog header="Cadastro Produto" widgetVar="dlg2" modal="true"
+		height="240">
+		<h:form>
+			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Nome:" for="nome" />
+				<p:inputText value="#{produtoBean.produto.nome}" id="nome" />
+				<p:outputLabel value="Descrição:" for="descricao" />
+				<p:inputText value="#{produtoBean.produto.descricao}" id="descricao" />
+				<p:outputLabel value="Valor:" for="valor" />
+				<p:inputText value="#{produtoBean.produto.valor}" id="valor" />
+				<p:outputLabel value="Estoque:" for="estoque" />
+				<p:inputText value="#{produtoBean.produto.estoque}" id="estoque" />
+				<p:outputLabel value="Categoria:" for="categoria" />
+				<p:selectOneMenu id="categoria" value="#{produtoBean.produto.categoria}" converter="conversorCategoria">
+					<f:selectItems value="#{categoriaBean.categorias}" var="categoria" itemLabel="#{categoria.nome}" itemValue="#{categoria}"/>
+				</p:selectOneMenu>
+				<p:commandButton update="tabela" value="Cadastrar"
+					action="#{produtoBean.cadastraProduto}" icon="ui-icon-disk">
+				</p:commandButton>
+				<p:commandButton update="tabela" process="@this" value="Fechar"
+					onclick="PF('dlg2').hide();" icon="ui-icon-disk"
+					action="#{produtoBean.novoCadastroProduto}">
+				</p:commandButton>
+			</h:panelGrid>
+
+		</h:form>
+		<f:ajax event="close" update="tabela" render="tabela"></f:ajax>
+	</p:dialog>
+
+
+
+	<h:form id="tabela">
+
+		<p:dataTable var="produto" value="#{produtoBean.produtos}"
+			paginatorPosition="bottom" paginator="true" rows="10"
+			id="tabelaProdutos">
+			<p:column headerText="Id">
+				<h:outputText value="#{produto.id_produto}" />
+			</p:column>
+
+			<p:column headerText="Categoria">
+				<h:outputText value="#{produto.categoria.nome}" />
+			</p:column>
+
+			<p:column headerText="Nome">
+				<h:outputText value="#{produto.nome}" />
+			</p:column>
+
+			<p:column headerText="Descrição">
+				<h:outputText value="#{produto.descricao}" />
+			</p:column>
+
+			<p:column headerText="Valor">
+				<h:outputText value="#{produto.valor}" />
+			</p:column>
+
+			<p:column headerText="Estoque">
+				<h:outputText value="#{produto.estoque}" />
+			</p:column>
+
+			<p:column>
+				<p:commandButton icon="ui-icon-pencil" title="Editar"
+					process="@this" action="/admin/alteraProduto?faces-redirect=true">
+					<f:setPropertyActionListener value="#{produto}"
+						target="#{produtoBean.produtoSelecionado}" />
+				</p:commandButton>
+				<p:commandButton icon="ui-icon-trash" title="Excluir"
+					process="@this" update="@form"
+					action="#{produtoBean.removerProduto}">
+					<f:setPropertyActionListener value="#{produto}"
+						target="#{produtoBean.produtoSelecionado}" />
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+	</h:form>
+	<!-- </ui:define>
+</ui:composition> -->
+
+</h:body>
+</html>

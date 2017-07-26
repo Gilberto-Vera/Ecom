@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition template="/admin/template.xhtml"
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+	<ui:define name="corpo">
+		<h:form>
+			<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+			<h:panelGrid columns="2">
+				<p:outputLabel value="Categoria:" for="categoria" />
+		        <p:autoComplete id="categoria" dropdown="true" />
+				<p:outputLabel value="Nome:" for="nome" />
+				<p:inputText value="#{produtoBean.produto.nome}" id="nome" />
+				<p:outputLabel value="Descrição:" for="descricao" />
+				<p:inputText value="#{produtoBean.produto.descricao}" id="descricao" />
+				<p:outputLabel value="Valor:" for="valor" />
+				<p:inputText value="#{produtoBean.produto.valor}" id="valor" />
+				<p:outputLabel value="Estoque:" for="estoque" />
+				<p:inputText value="#{produtoBean.produto.estoque}" id="estoque" />
+			</h:panelGrid>
+			<p:commandButton value="Cadastrar"
+				action="#{produtoBean.cadastraProduto}" icon="ui-icon-disk">
+				<f:ajax execute="tabelaProdutos" />
+			</p:commandButton>
+		</h:form>
+	</ui:define>
+</ui:composition>
