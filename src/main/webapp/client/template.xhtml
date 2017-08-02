@@ -17,20 +17,23 @@
 		<p:layoutUnit styleClass="loutMain" position="north" size="100"
 			minSize="40" maxSize="200">
 			<p:panel styleClass="loutMain loutNorth" id="basic">
-				<p:commandButton value="Carrinho"
-					onclick="PF('janelaCarrinho').show();" oncomplete=""
-					icon="ui-icon-disk" update="tabelaCarrinho">
-				</p:commandButton>
+				<h:panelGrid columns="2" cellpadding ="10">
+					<p:commandButton value="Carrinho"
+						onclick="PF('janelaCarrinho').show();" oncomplete=""
+						icon="ui-icon-cart" update="tabelaCarrinho">
+					</p:commandButton>
+				</h:panelGrid>
 			</p:panel>
 		</p:layoutUnit>
-		
+
 		<p:layoutUnit position="west" header="Categoria" resizable="true"
 			closable="false" collapsible="true" size="200">
 			<ui:insert name="categoria">
 			</ui:insert>
 		</p:layoutUnit>
 
-		<p:layoutUnit position="center" header="Produtos" resizable="true" size="100">
+		<p:layoutUnit position="center" header="Produtos" resizable="true"
+			size="100">
 			<ui:insert name="produtos">
 			</ui:insert>
 		</p:layoutUnit>
