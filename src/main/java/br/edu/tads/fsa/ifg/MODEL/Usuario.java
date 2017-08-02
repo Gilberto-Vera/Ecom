@@ -18,7 +18,7 @@ public class Usuario implements Serializable{
 
 	@Id
 	@GeneratedValue
-	private int id;
+	private int id_usuario;
 	
 	private String nome = "";
 	
@@ -26,7 +26,7 @@ public class Usuario implements Serializable{
 	
 	private String senha = "";
 	
-	private String papel = "";
+	private String tipo = "";
 	
 	@Transient
 	public static String ADMIN = "admin";
@@ -43,10 +43,10 @@ public class Usuario implements Serializable{
 		this.logado = logado;
 	}
 	public int getId() {
-		return id;
+		return id_usuario;
 	}
 	public void setId(int id) {
-		this.id = id;
+		this.id_usuario = id;
 	}
 	public String getNome() {
 		return nome;
@@ -67,10 +67,10 @@ public class Usuario implements Serializable{
 		this.senha = senha;
 	}
 	public String getPapel() {
-		return papel;
+		return tipo;
 	}
-	public void setPapel(String papel) {
-		this.papel = papel;
+	public void setPapel(String tipo) {
+		this.tipo = tipo;
 	}
 	
 	public boolean logar(String papel){
