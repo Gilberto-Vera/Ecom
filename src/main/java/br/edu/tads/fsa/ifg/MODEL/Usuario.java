@@ -66,21 +66,22 @@ public class Usuario implements Serializable{
 	public void setSenha(String senha) {
 		this.senha = senha;
 	}
-	public String getPapel() {
+	
+	
+	public String getTipo() {
 		return tipo;
 	}
-	public void setPapel(String tipo) {
+	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	
 	public boolean logar(String papel){
 		System.out.println(this);
 		Usuario usuarioBD = UsuarioDAOJPA.buscaUsuarioLogin(this.getLogin());
 		if(usuarioBD!=null){
-			if(usuarioBD.getSenha().equals(this.getSenha()) && papel.equals(usuarioBD.getPapel())){
+			if(usuarioBD.getSenha().equals(this.getSenha()) && papel.equals(usuarioBD.getTipo())){
 				this.setId(usuarioBD.getId());
 				this.setNome(usuarioBD.getNome());
-				this.setPapel(usuarioBD.getPapel());
+				this.setTipo(usuarioBD.getTipo());
 				return true;
 			}
 		}

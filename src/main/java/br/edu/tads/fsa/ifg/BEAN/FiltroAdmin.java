@@ -41,7 +41,7 @@ public class FiltroAdmin implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 		HttpSession session = ((HttpServletRequest)request).getSession();
 		Usuario usuario = (Usuario)session.getAttribute("usuario");
-		if(usuario!=null&&usuario.isLogado()&&usuario.getPapel().equals(Usuario.ADMIN)){
+		if(usuario!=null&&usuario.isLogado()&&usuario.getTipo().equals(Usuario.ADMIN)){
 			chain.doFilter(request, response);
 			
 		}else{

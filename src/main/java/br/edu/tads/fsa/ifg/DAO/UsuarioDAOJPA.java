@@ -60,7 +60,7 @@ public class UsuarioDAOJPA {
 		Usuario u = manager.find(Usuario.class, usuario.getId());
 		u.setNome(usuario.getNome());
 		u.setLogin(usuario.getLogin());
-		u.setPapel(usuario.getPapel());
+		u.setTipo(usuario.getTipo());
 		u.setSenha(usuario.getSenha());
 		tx.commit();
 		manager.close();

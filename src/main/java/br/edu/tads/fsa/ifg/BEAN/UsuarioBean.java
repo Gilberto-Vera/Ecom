@@ -25,7 +25,7 @@ public class UsuarioBean implements Serializable{
 	public void resetaUsuario(){
 		usuario.setNome(null);
 		usuario.setLogado(false);
-		usuario.setPapel(null);
+		usuario.setTipo(null);
 		usuario.setId(-1);
 		usuario.setLogin(null);
 		usuario.setSenha(null);

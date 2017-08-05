@@ -5,4 +5,20 @@
     xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd"
     version="2.2">
 
+	<navigation-rule>
+	    <from-view-id>/loginAdm.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>homeAdmin</from-outcome>
+            <to-view-id>/admin/produto.xhtml</to-view-id>
+        </navigation-case>
+	</navigation-rule>
+	
+	<navigation-rule>
+	    <from-view-id>/admin/produto.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>loginAdmin</from-outcome>
+            <to-view-id>/loginAdm.xhtml</to-view-id>
+        </navigation-case>
+	</navigation-rule>
+
 </faces-config>
