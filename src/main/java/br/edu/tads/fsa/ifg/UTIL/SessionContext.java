@@ -44,11 +44,11 @@ public class SessionContext {
    }
     
     public Usuario getUsuarioLogado(){
-         return (Usuario) getAttribute("usuarioLogado");
+         return (Usuario) getAttribute("usuario");
     }
     
     public void setUsuarioLogado(Usuario usuario){
-         setAttribute("usuarioLogado", usuario);
+         setAttribute("usuario", usuario);
     }
     
     public void encerrarSessao(){   

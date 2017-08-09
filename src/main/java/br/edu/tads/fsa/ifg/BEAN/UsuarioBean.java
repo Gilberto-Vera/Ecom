@@ -60,6 +60,7 @@ public class UsuarioBean implements Serializable{
 	}
 	
 	public String logoutAdmin(){
+		System.out.println("#####");
 		SessionContext.getInstance().encerrarSessao();
 		return "loginAdmin";
 	}
