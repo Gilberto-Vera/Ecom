@@ -67,18 +67,17 @@ public class Usuario implements Serializable{
 		this.senha = senha;
 	}
 	
-	
 	public String getTipo() {
 		return tipo;
 	}
 	public void setTipo(String tipo) {
 		this.tipo = tipo;
 	}
-	public boolean logar(String papel){
+	public boolean logar(String tipo){
 		System.out.println(this);
 		Usuario usuarioBD = UsuarioDAOJPA.buscaUsuarioLogin(this.getLogin());
 		if(usuarioBD!=null){
-			if(usuarioBD.getSenha().equals(this.getSenha()) && papel.equals(usuarioBD.getTipo())){
+			if(usuarioBD.getSenha().equals(this.getSenha()) && tipo.equals(usuarioBD.getTipo())){
 				this.setId(usuarioBD.getId());
 				this.setNome(usuarioBD.getNome());
 				this.setTipo(usuarioBD.getTipo());
@@ -87,7 +86,5 @@ public class Usuario implements Serializable{
 		}
 		return false;
 	}
-	
-	
 
 }

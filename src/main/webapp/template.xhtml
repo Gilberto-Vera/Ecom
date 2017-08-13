@@ -6,137 +6,181 @@
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
-	<link rel="StyleSheet" type="text/css" href="css/template.css" media="screen" />
+	<link rel="StyleSheet" type="text/css" href="css/template.css"
+		media="screen" />
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<title>Insert title here</title>
 </h:head>
 <h:body styleClass="loutMain">
-<h:form id="form">
-	<p:layout styleClass="loutMain" fullPage="true" style="min-width:400px;min-height:400px;">
-		<p:layoutUnit  styleClass="loutMain" position="north" size="100" minSize="40" maxSize="200">
-        		 <p:panel styleClass="loutMain loutNorth"  id="basic">
-        			<p:commandButton value="Carrinho"
-						onclick="PF('janelaCarrinho').show();" oncomplete="" icon="ui-icon-disk" update=":form:tabelaCarrinho">
-				</p:commandButton>
-				
-				<!-- Link para realizar o processo de autenticação e autorização  -->
-				<p:outputPanel id="painelLogin" style="text-align:center;">
-				<h:panelGrid columns="2">
-					<p:commandLink value="login" onclick="PF('janelaLogar').show();" rendered="#{!usuarioBean.usuario.logado}">
-					</p:commandLink>
-					<p:commandLink value="#{usuarioBean.usuario.nome}" onclick="PF('janelaUsuario').show();" rendered="#{usuarioBean.usuario.logado}" update=":form:perfilUsuario">
-					</p:commandLink>
-					<p:commandLink value="sair" rendered="#{usuarioBean.usuario.logado}" action="#{usuarioBean.logout}" update="painelLogin :form:painelGridLogin">
-					</p:commandLink>
-				</h:panelGrid>
-				</p:outputPanel>
-    			</p:panel>
-    		</p:layoutUnit>
-    		
-    		<p:layoutUnit position="west" resizable="true" closable="true" collapsible="true" size="200" minSize="40" maxSize="200">
-        		<ui:insert name="categoria">
-			</ui:insert>
-    		</p:layoutUnit>
- 
-    		<p:layoutUnit position="center" resizable="true" size="100" minSize="40" maxSize="200">
-        		<ui:insert name="produtos">
-			</ui:insert>
-    		</p:layoutUnit>
-    		<p:layoutUnit position="south" resizable="true" size="100" minSize="40" maxSize="200">
-        		
-    		</p:layoutUnit>
-	</p:layout>
-	
-	<!-- Janela que exibe o carrinho para o usuário -->
-	<p:dialog header="Carrinho" widgetVar="janelaCarrinho"  width="80%" height="240" onShow="">
-		<p:dataTable var="produto" value="#{produtoBean.produtosCarrinho}" 
+	<h:form id="form">
+		<p:layout styleClass="loutMain" fullPage="true"
+			style="min-width:400px;min-height:400px;">
+			<p:layoutUnit styleClass="loutMain" position="north" size="100"
+				minSize="40" maxSize="200">
+				<p:panel styleClass="loutMain loutNorth" id="basic">
+					<p:commandButton value="Carrinho"
+						onclick="PF('janelaCarrinho').show();" oncomplete=""
+						icon="ui-icon-disk" update=":form:tabelaCarrinho">
+					</p:commandButton>
+
+					<!-- Link para realizar o processo de autenticação e autorização  -->
+					<p:outputPanel id="painelLogin" style="text-align:center;">
+						<h:panelGrid columns="2">
+							<p:commandLink value="login" onclick="PF('janelaLogar').show();"
+								rendered="#{!usuarioBean.usuario.logado}">
+							</p:commandLink>
+							<p:commandLink value="#{usuarioBean.usuario.nome}"
+								onclick="PF('janelaUsuario').show();"
+								rendered="#{usuarioBean.usuario.logado}"
+								update=":form:perfilUsuario">
+							</p:commandLink>
+							<p:commandLink value="sair"
+								rendered="#{usuarioBean.usuario.logado}"
+								action="#{usuarioBean.logout}"
+								update="painelLogin :form:painelGridLogin">
+							</p:commandLink>
+						</h:panelGrid>
+					</p:outputPanel>
+					
+				</p:panel>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="west" resizable="true" closable="true"
+				collapsible="true" size="200" minSize="40" maxSize="200">
+				<ui:insert name="categoria">
+				</ui:insert>
+			</p:layoutUnit>
+
+			<p:layoutUnit position="center" resizable="true" size="100"
+				minSize="40" maxSize="200">
+				<ui:insert name="produtos">
+				</ui:insert>
+			</p:layoutUnit>
+			<p:layoutUnit position="south" resizable="true" size="100"
+				minSize="40" maxSize="200">
+			</p:layoutUnit>
+		</p:layout>
+
+		<!-- Janela que exibe o carrinho para o usuário -->
+		<p:dialog header="Carrinho" widgetVar="janelaCarrinho" width="80%"
+			height="240" onShow="">
+			<p:dataTable var="produto" value="#{produtoBean.produtosCarrinho}"
 				paginatorPosition="bottom" paginator="true" rows="5"
 				id="tabelaCarrinho">
 				<p:column headerText="Id">
 					<h:outputText value="#{produto.id}" />
 				</p:column>
-
 				<p:column headerText="Nome">
 					<h:outputText value="#{produto.nome}" />
 				</p:column>
-
 				<p:column headerText="Descrição">
 					<h:outputText value="#{produto.descricao}" />
 				</p:column>
-
 				<p:column headerText="Valor">
 					<h:outputText value="#{produto.valor}" />
 				</p:column>
 				<p:column headerText="Quantidade Carrinho">
-					<p:commandButton  value="+" action="#{produtoBean.incrementarProdutoCarrinho}" update=":form:tabelaCarrinho">
+					<p:commandButton value="+"
+						action="#{produtoBean.incrementarProdutoCarrinho}"
+						update=":form:tabelaCarrinho">
 						<f:setPropertyActionListener value="#{produto}"
 							target="#{produtoBean.produtoSelecionado}" />
 					</p:commandButton>
 					<h:outputLabel value="#{produto.quantidadeCarrinho}" />
-					<p:commandButton value="-" action="#{produtoBean.decrementarProdutoCarrinho}" update=":form:tabelaCarrinho">
+					<p:commandButton value="-"
+						action="#{produtoBean.decrementarProdutoCarrinho}"
+						update=":form:tabelaCarrinho">
 						<f:setPropertyActionListener value="#{produto}"
 							target="#{produtoBean.produtoSelecionado}" />
 					</p:commandButton>
 				</p:column>
 				<p:column>
-					<p:commandButton icon="ui-icon-trash" title="Excluir" action="#{produtoBean.removerDoCarrinho}" update=":form:tabelaCarrinho">
+					<p:commandButton icon="ui-icon-trash" title="Excluir"
+						action="#{produtoBean.removerDoCarrinho}"
+						update=":form:tabelaCarrinho">
 						<f:setPropertyActionListener value="#{produto}"
 							target="#{produtoBean.produtoSelecionado}" />
 					</p:commandButton>
 				</p:column>
 			</p:dataTable>
-    		</p:dialog>
-    		
-    		<!-- Janela que exibe o formulário para o processo de login do usuário -->
-    		<p:dialog header="Logar" widgetVar="janelaLogar" modal="true">
-	    			<p:outputPanel id="painelGridLogin" style="text-align:center;">
-					<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
-					<p:defaultCommand target="commandLogar" />
-					<h:panelGrid columns="2">
-						
-						<p:outputLabel value="Login:" for="login" />
-						<p:inputText value="#{usuarioBean.usuario.login}" id="login" />
-						<p:outputLabel value="Senha:" for="senha" />
-						<p:inputText value="#{usuarioBean.usuario.senha}" id="senha" />
-						 
-						<p:commandButton id="commandLogar" value="Logar"
-							action="#{usuarioBean.logarCliente}" icon="ui-icon-disk" update="painelLogin">
-						</p:commandButton>
-						<p:commandButton value="Fechar"
-							onclick="PF('janelaLogar').hide();" icon="ui-icon-disk" update="painelLogin">
-						</p:commandButton>
-						
-						<p:commandLink value="Criar conta" action="#{usuarioBean.cadastrar}">
-						
-						</p:commandLink>
-					</h:panelGrid>
-				</p:outputPanel>
-				
 		</p:dialog>
-		
-		<!-- Caixa que exibe os detalhes do usuário -->
-	    	<p:dialog header="Perfil Usuário" widgetVar="janelaUsuario"  height="240">
-	    		<p:outputPanel id="perfilUsuario" style="text-align:center;">
-				<h:panelGrid columns="1">
-					
-					<p:outputLabel value="#{usuarioBean.usuario.nome}" id="nomeUsuario" />
-					
-					<p:outputLabel value="#{usuarioBean.usuario.login}" id="loginUsuario" />
-					
-					<p:outputLabel value="#{usuarioBean.usuario.tipo}" id="papelUsuario" />
-					
-					
-					<p:commandButton value="Alterar Dados"
-						action="#{produtoBean.adicionarNoCarrinho}" oncomplete="" icon="ui-icon-disk">
+
+		<!-- Janela que exibe o formulário para o processo de login do usuário -->
+		<p:dialog header="Logar" widgetVar="janelaLogar" modal="true">
+			<p:outputPanel id="painelGridLogin" style="text-align:center;">
+				<p:messages showDetail="false" showSummary="true" autoUpdate="true" />
+				<p:defaultCommand target="commandLogar" />
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Login:" for="login" />
+					<p:inputText value="#{usuarioBean.usuario.login}" id="login" />
+					<p:outputLabel value="senha:" for="senha" />
+					<p:password value="#{usuarioBean.usuario.senha}" id="senha" />
+					<p:commandButton id="commandLogar" value="Logar"
+						action="#{usuarioBean.logarCliente}" icon="ui-icon-disk"
+						update="painelLogin">
 					</p:commandButton>
-					<p:commandButton update="@all" process="@all" value="Excluir Cadastro"
-						onclick="PF('janelaDetalheProduto').hide();" icon="ui-icon-disk" action="#{produtoBean.resetaProduto}">
+					<p:commandButton value="Fechar" onclick="PF('janelaLogar').hide();"
+						icon="ui-icon-disk" update="painelLogin">
 					</p:commandButton>
+					<p:commandLink value="Criar conta" onclick="PF('dlgCdCl').show();"
+						update="painelLogin">
+					</p:commandLink>
 				</h:panelGrid>
-				
-				
 			</p:outputPanel>
 		</p:dialog>
+
+		<!-- Caixa que exibe os detalhes do usuário -->
+		<p:dialog header="Perfil Usuário" widgetVar="janelaUsuario"
+			height="240">
+			<p:outputPanel id="perfilUsuario" style="text-align:center;">
+				<h:panelGrid columns="1">
+					<p:outputLabel value="#{usuarioBean.usuario.nome}" id="nomeUsuario" />
+					<p:outputLabel value="#{usuarioBean.usuario.login}"
+						id="loginUsuario" />
+					<p:outputLabel value="#{usuarioBean.usuario.tipo}"
+						id="papelUsuario" />
+					<p:commandButton value="Alterar Dados"
+						action="#{produtoBean.adicionarNoCarrinho}" oncomplete=""
+						icon="ui-icon-disk">
+					</p:commandButton>
+					<p:commandButton update="@all" process="@all"
+						value="Excluir Cadastro"
+						onclick="PF('janelaDetalheProduto').hide();" icon="ui-icon-disk"
+						action="#{produtoBean.resetaProduto}">
+					</p:commandButton>
+				</h:panelGrid>
+			</p:outputPanel>
+		</p:dialog>
+
+		<!-- Dialog de Cadastro de Cliente -->
+		<p:dialog header="Cadastro de Cliente" widgetVar="dlgCdCl"
+			modal="true">
+			<h:form>
+				<p:messages showDetail="false" showSummary="true" autoUpdate="false" />
+				<h:panelGrid columns="2">
+					<p:outputLabel value="Nome:" for="nome" />
+					<p:inputText value="#{usuarioBean.usuario.nome}" id="nome" />
+					<p:outputLabel value="Login:" for="login" />
+					<p:inputText value="#{usuarioBean.usuario.login}" id="login" />
+					<p:outputLabel value="Senha:" for="senha1" />
+					<p:password id="senha1" value="#{usuarioBean.usuario.senha}"
+						match="senha2" />
+					<p:outputLabel value="Confirmar Senha:" for="senha2"
+						required="true" />
+					<p:password id="senha2" value="#{usuarioBean.usuario.senha}" />
+					<p:outputLabel value="Tipo:" for="tipo" />
+					<p:inputText value="#{usuarioBean.usuario.tipo}" id="tipo" />
+					<p:commandButton value="Cadastrar"
+						action="#{usuarioBean.cadastraUsuario}" icon="ui-icon-disk">
+					</p:commandButton>
+					<p:commandButton process="@this" value="Fechar"
+						onclick="PF('dlg3').hide();" icon="ui-icon-disk"
+						action="#{usuarioBean.novoCadastroUsuario}">
+					</p:commandButton>
+				</h:panelGrid>
+			</h:form>
+		</p:dialog>
+
 	</h:form>
 </h:body>
 </html>

@@ -10,43 +10,33 @@ import br.edu.tads.fsa.ifg.MODEL.*;
 
 public class ProdutoDAOJPA {
 	public static boolean cadastrarProduto(Produto produto) {
-
 		EntityManager manager = ConnectionManagerJPA.getEntityManager();
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
 		manager.persist(produto);
 		tx.commit();
 		manager.close();
-
 		return true;
-
 	}
 
 	public static Produto buscaProduto(int id) {
-
 		EntityManager manager = ConnectionManagerJPA.getEntityManager();
 		Produto p = manager.find(Produto.class, id);
 		manager.close();
 		return p;
-
 	}
 
 	public static List<Produto> listaProdutos() {
-
 		EntityManager manager = ConnectionManagerJPA.getEntityManager();
 		Query query = manager.createQuery("from Produto");
 
 		@SuppressWarnings("unchecked")
 		List<Produto> listaProdutos = query.getResultList();
-
 		manager.close();
-
 		return listaProdutos;
-
 	}
 
 	public static boolean alterarProduto(Produto produto) {
-		
 		EntityManager manager = ConnectionManagerJPA.getEntityManager();
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
@@ -57,13 +47,10 @@ public class ProdutoDAOJPA {
 		p.setEstoque(produto.getEstoque());	
 		tx.commit();
 		manager.close();
-
 		return true;
-
 	}
 
 	public static boolean excluirProduto(int id) {
-
 		EntityManager manager = ConnectionManagerJPA.getEntityManager();
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
@@ -71,8 +58,6 @@ public class ProdutoDAOJPA {
 		manager.remove(p);
 		tx.commit();
 		manager.close();
-	
 		return true;
 	}
-
 }

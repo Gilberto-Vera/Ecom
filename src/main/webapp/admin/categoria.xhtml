@@ -7,17 +7,15 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 <h:head>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-	<title>Insert title here</title>
+	<title>Ecom</title>
 </h:head>
 <h:body>
 
 	<h:form>
 		<p:menubar style="margin-top: 0px; margin-bottom: 20px">
-
 			<p:submenu label="Cadastro">
 				<p:menuitem onclick="PF('dlg3').show();" value="Categoria" />
 			</p:submenu>
-
 			<p:submenu label="Consulta">
 				<p:menuitem value="Produtos"
 					action="/admin/produto?faces-redirect=true" />
@@ -51,18 +49,15 @@
 	</p:dialog>
 
 	<h:form id="tabela">
-
 		<p:dataTable var="categoria" value="#{categoriaBean.categorias}"
 			paginatorPosition="bottom" paginator="true" rows="10"
 			id="tabelaCategorias">
 			<p:column headerText="Id">
 				<h:outputText value="#{categoria.id_categoria}" />
 			</p:column>
-
 			<p:column headerText="Categoria">
 				<h:outputText value="#{categoria.nome}" />
 			</p:column>
-
 			<p:column>
 				<p:commandButton icon="ui-icon-pencil" title="Editar"
 					process="@this" action="/admin/alteraCategoria?faces-redirect=true">

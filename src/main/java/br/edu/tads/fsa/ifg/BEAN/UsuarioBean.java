@@ -2,11 +2,13 @@ package br.edu.tads.fsa.ifg.BEAN;
 
 import java.io.Serializable;
 
+import javax.faces.application.FacesMessage;
 import javax.faces.application.NavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
+import br.edu.tads.fsa.ifg.DAO.UsuarioDAOJPA;
 import br.edu.tads.fsa.ifg.MODEL.Usuario;
 import br.edu.tads.fsa.ifg.UTIL.SessionContext;
 
@@ -31,8 +33,15 @@ public class UsuarioBean implements Serializable{
 		usuario.setSenha(null);
 	}
 	
-	public void cadastrar(){
-		
+	public void novoCadastroUsuario() {
+		usuario = new Usuario();
+	}
+	
+	public void cadastraUsuario(){
+		UsuarioDAOJPA.cadastrarUsuario(usuario);
+		FacesMessage message = new FacesMessage("Usuário Cadastrado");
+		FacesContext.getCurrentInstance().addMessage(null, message);
+		novoCadastroUsuario();
 	}
 	
 	public boolean logado(){
@@ -40,6 +49,7 @@ public class UsuarioBean implements Serializable{
 	}
 	
 	public void logarCliente(){
+		System.out.println("passou");
 		if(usuario.logar(Usuario.CLIENTE)){
 			usuario.setLogado(true);
 		}
@@ -60,7 +70,6 @@ public class UsuarioBean implements Serializable{
 	}
 	
 	public String logoutAdmin(){
-		System.out.println("#####");
 		SessionContext.getInstance().encerrarSessao();
 		return "loginAdmin";
 	}
@@ -72,5 +81,4 @@ public class UsuarioBean implements Serializable{
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
-
 }

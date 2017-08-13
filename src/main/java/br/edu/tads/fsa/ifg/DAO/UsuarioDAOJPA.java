@@ -11,25 +11,20 @@ import br.edu.tads.fsa.ifg.MODEL.Usuario;
 public class UsuarioDAOJPA {
 	
 	public static boolean cadastrarUsuario(Usuario usuario) {
-
 		EntityManager manager = ConnectionManagerJPA.getEntityManager();
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
 		manager.persist(usuario);
 		tx.commit();
 		manager.close();
-
 		return true;
-
 	}
 
 	public static Usuario buscaUsuario(int id) {
-
 		EntityManager manager = ConnectionManagerJPA.getEntityManager();
 		Usuario u = manager.find(Usuario.class, id);
 		manager.close();
 		return u;
-
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -37,7 +32,6 @@ public class UsuarioDAOJPA {
 
 		EntityManager manager = ConnectionManagerJPA.getEntityManager();
 		Query query = manager.createQuery("SELECT u FROM Usuario u WHERE u.login ='" + login + "'");
-		//query.setParameter(1, "%"+login+"%");
 		List<Usuario> usuarios = query.getResultList();
 		manager.close();
 		if(usuarios.isEmpty()){
@@ -48,12 +42,9 @@ public class UsuarioDAOJPA {
 			System.out.println(usuarios.get(0).getNome());
 			return usuarios.get(0);
 		}
-		
-
 	}
 	
 	public static boolean alterarUsuario(Usuario usuario) {
-		
 		EntityManager manager = ConnectionManagerJPA.getEntityManager();
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
@@ -64,13 +55,10 @@ public class UsuarioDAOJPA {
 		u.setSenha(usuario.getSenha());
 		tx.commit();
 		manager.close();
-
 		return true;
-
 	}
 
 	public static boolean excluirUsuario(int id) {
-
 		EntityManager manager = ConnectionManagerJPA.getEntityManager();
 		EntityTransaction tx = manager.getTransaction();
 		tx.begin();
@@ -78,7 +66,6 @@ public class UsuarioDAOJPA {
 		manager.remove(u);
 		tx.commit();
 		manager.close();
-	
 		return true;
 	}
 }

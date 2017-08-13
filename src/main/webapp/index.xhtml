@@ -6,64 +6,62 @@
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:f="http://java.sun.com/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+	<ui:define name="categoria">
+		<!-- Lista que exibe as categorias na tela inicial do usuário-->
+		<p:dataList value="#{categoriaBean.categorias}" var="categoria"
+			type="definition">
+			<p:commandLink id="ajax" actionListener="#{buttonView.buttonAction}">
+				<h:outputText value="#{categoria.nome}" />
+			</p:commandLink>
+		</p:dataList>
+	</ui:define>
 	
-
-
-<ui:define name="categoria">
-
-	<!-- Lista que exibe as categorias na tela inicial do usuário-->
-	<p:dataList value="#{categoriaBean.categorias}" var="categoria" type="definition">
-       <p:commandLink id="ajax"  actionListener="#{buttonView.buttonAction}">
-        <h:outputText value="#{categoria.nome}" />
-    </p:commandLink>
-    </p:dataList>
-</ui:define>
-
-<ui:define name="produtos">
-	
+	<ui:define name="produtos">
 		<!-- DataGrid que exibe os produtos na tela inicial do usuário -->
-		<p:dataGrid var="produto" value="#{produtoBean.produtos}" columns="3" layout="grid"
-	        rows="12" paginator="true" id="produtos">
-	        <p:panel style="text-align:center">
-	            <h:panelGrid columns="1" style="width:100%">
-	                <!--<p:graphicImage name="demo/images/car/#{car.brand}.gif"/>-->
-	 
-	                <h:outputText value="#{produto.nome}" />
-	                <h:outputText value="#{produto.categoria.nome}" />
-	 
-	                <p:commandLink update=":form:detalheProduto" oncomplete="PF('janelaDetalheProduto').show()" title="Visualizar Detalhes">
-	                    <h:outputText styleClass="ui-icon ui-icon-search" style="margin:0 auto;" />
-	                    <f:setPropertyActionListener value="#{produto}" target="#{produtoBean.produtoSelecionado}" />
-	                </p:commandLink>
-	            </h:panelGrid>
-	        </p:panel>
-	    </p:dataGrid>
-	    
-	    <!-- Caixa que exibe os detalhes do produto -->
-	    	<p:dialog header="Visualizar Produto" widgetVar="janelaDetalheProduto"  height="240">
-	    		<p:outputPanel id="detalheProduto" style="text-align:center;">
+		<p:dataGrid var="produto" value="#{produtoBean.produtos}" columns="3"
+			layout="grid" rows="12" paginator="true" id="produtos">
+			<p:panel style="text-align:center">
+				<h:panelGrid columns="1" style="width:100%">
+					<h:outputText value="#{produto.nome}" />
+					<h:outputText value="#{produto.categoria.nome}" />
+					<p:commandLink update=":form:detalheProduto"
+						oncomplete="PF('janelaDetalheProduto').show()"
+						title="Visualizar Detalhes">
+						<h:outputText styleClass="ui-icon ui-icon-search"
+							style="margin:0 auto;" />
+						<f:setPropertyActionListener value="#{produto}"
+							target="#{produtoBean.produtoSelecionado}" />
+					</p:commandLink>
+				</h:panelGrid>
+			</p:panel>
+		</p:dataGrid>
+
+		<!-- Caixa que exibe os detalhes do produto -->
+		<p:dialog header="Visualizar Produto" widgetVar="janelaDetalheProduto"
+			height="240">
+			<p:outputPanel id="detalheProduto" style="text-align:center;">
 				<h:panelGrid columns="1">
-					
-					<p:outputLabel value="#{produtoBean.produtoSelecionado.nome}" id="nome" />
-					
-					<p:outputLabel value="#{produtoBean.produtoSelecionado.descricao}" id="descricao" />
-					
-					<p:outputLabel value="#{produtoBean.produtoSelecionado.valor}" id="valor" />
-					
-					<p:outputLabel value="#{produtoBean.produtoSelecionado.estoque}" id="estoque" />
-					
+					<p:outputLabel value="#{produtoBean.produtoSelecionado.nome}"
+						id="nome" />
+					<p:outputLabel value="#{produtoBean.produtoSelecionado.descricao}"
+						id="descricao" />
+					<p:outputLabel value="#{produtoBean.produtoSelecionado.valor}"
+						id="valor" />
+					<p:outputLabel value="#{produtoBean.produtoSelecionado.estoque}"
+						id="estoque" />
 					<p:commandButton value="Adicionar ao carrinho"
-						action="#{produtoBean.adicionarNoCarrinho}" oncomplete="" icon="ui-icon-disk">
+						action="#{produtoBean.adicionarNoCarrinho}" oncomplete=""
+						icon="ui-icon-disk">
 					</p:commandButton>
 					<p:commandButton update="@all" process="@all" value="Fechar"
-						onclick="PF('janelaDetalheProduto').hide();" icon="ui-icon-disk" action="#{produtoBean.resetaProduto}">
+						onclick="PF('janelaDetalheProduto').hide();" icon="ui-icon-disk"
+						action="#{produtoBean.resetaProduto}">
 					</p:commandButton>
 				</h:panelGrid>
-				
-				
 			</p:outputPanel>
-		</p:dialog>
-	    
-</ui:define>
 
+		</p:dialog>
+	</ui:define>
+	
 </ui:composition>

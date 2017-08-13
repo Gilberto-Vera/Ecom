@@ -25,15 +25,19 @@ public class Categoria implements Serializable {
 	public int getId_categoria() {
 		return id_categoria;
 	}
+	
 	public void setId_categoria(int id_categoria) {
 		this.id_categoria = id_categoria;
 	}
+	
 	public String getNome() {
 		return nome;
 	}
+	
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+	
 	@Override
 	public boolean equals(Object obj) {
 		if(this == obj)
@@ -48,9 +52,6 @@ public class Categoria implements Serializable {
 				return false;
 		}else if(id_categoria!=other.id_categoria)
 			return false;
-		return true;
-		
+		return true;	
 	}
-	
-
 }
