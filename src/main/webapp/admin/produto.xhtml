@@ -33,7 +33,7 @@
 					action="/admin/categoria?faces-redirect=true" />
 			</p:submenu>
 			<p:submenu label="Sistema">
-				<p:menuitem value="Sair" action="#{usuarioBean.logoutAdmin}" />
+				<p:menuitem value="Sair" action="#{usuarioBean.logout}" />
 			</p:submenu>
 		</p:menubar>
 	</h:form>
@@ -67,8 +67,6 @@
 		</h:form>
 		<f:ajax event="close" update="tabela" render="tabela"></f:ajax>
 	</p:dialog>
-
-
 
 	<h:form id="tabela">
 
@@ -114,8 +112,6 @@
 			</p:column>
 		</p:dataTable>
 	</h:form>
-	<!-- </ui:define>
-</ui:composition> -->
 
 </h:body>
 </html>
